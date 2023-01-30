@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - estilo cupom fiscal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  
+  <style>
+	.text-center {
+	text-align: center;
+  }
+  .ttu {
+	text-transform: uppercase;
+  }
+  .printer-ticket {
+	display: table !important;
+	width: 100%;
+	max-width: 400px;
+	font-weight: light;
+	line-height: 1.3em;
+  }
+  .printer-ticket,
+  .printer-ticket * {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+  }
+  .printer-ticket th:nth-child(2),
+  .printer-ticket td:nth-child(2) {
+	width: 50px;
+  }
+  .printer-ticket th:nth-child(3),
+  .printer-ticket td:nth-child(3) {
+	width: 90px;
+	text-align: right;
+  }
+  .printer-ticket th {
+	font-weight: inherit;
+	padding: 10px 0;
+	text-align: center;
+	border-bottom: 1px dashed #BCBCBC;
+  }
+  .printer-ticket tbody tr:last-child td {
+	padding-bottom: 10px;
+  }
+  .printer-ticket tfoot .sup td {
+	padding: 10px 0;
+	border-top: 1px dashed #BCBCBC;
+  }
+  .printer-ticket tfoot .sup.p--0 td {
+	padding-bottom: 0;
+  }
+  .printer-ticket .title {
+	font-size: 1.5em;
+	padding: 15px 0;
+  }
+  .printer-ticket .top td {
+	padding-top: 10px;
+  }
+  .printer-ticket .last td {
+	padding-bottom: 10px;
+  }
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<table class="printer-ticket">
+ 	<thead>
+		<tr>
+			<th class="title" colspan="3">BIG BEL PIZZAS</th>
+            
+		</tr>
+
+        <tr>
+            <th colspan="3">
+                2-1-24, NO 1F - COND. TATSUMI BIRU, BLOCO ,
+                APTO. 1F - TATSUMI NISHI
+                FONES: (05) 6454-7272 - (07) 0377-P-
+                OKAZAKI - AICHI
+            </th>
+
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                DATA DE IMPRESSAO
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><b>17/11/2015 - 11:57:52</b></td>
+        </tr>
+
+
+
+        <tr>
+			<th class="title" colspan="3">RELATÓRIO DE CONSUMO</th>
+            
+		</tr>
+
+		
+	</thead>
+
+    <tr>
+        <td><b>DESCRICAO</b></td>
+        <td><b>QTD</b></td>
+        <td><b>PRECO</b></td>
+    </tr>
+
+	<tbody id="produtosCupomBody">
+		
+		
+	</tbody>
+
+	<tfoot id="produtosCupomFooter">
+		<tr class="sup ttu p--0">
+			<td >
+				SUB-TOTAL
+			</td>
+            <td >
+				
+			</td>
+            <td id="subTotal">
+				
+			</td>
+		</tr>
+
+		
+		<tr class="ttu">
+			<td colspan="2">Taxa de serviço</td>
+			<td align="right" id="taxaServico">¥ 0.000</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Desconto</td>
+			<td align="right" id="desconto">¥ 0.000</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2"><b>Total</b></td>
+			<td align="right" id="total"><b>¥ 4.000</b></td>
+		</tr>
+		<tr class="sup ttu p--0">
+			<td colspan="3">
+				<b>Pagamentos</b>
+			</td>
+		</tr>
+		
+		<tr class="ttu">
+			<td colspan="2">Dinheiro</td>
+			<td align="right" id="PagDinheiro">¥ 10.000</td>
+		</tr>
+	
+		<tr class="ttu">
+			<td colspan="2">Troco</td>
+			<td align="right" id="PagTroco">¥ 6.000</td>
+		</tr>
+		<tr class="sup">
+			<td colspan="3" align="center" id="NumPedido">
+				
+			</td>
+		</tr>
+		<tr class="sup">
+			<td colspan="3" align="center">
+				www.Mokutech.com.br
+			</td>
+		</tr>
+	</tfoot>
+</table>
+<!-- partial -->
+  
+</body>
+</html>

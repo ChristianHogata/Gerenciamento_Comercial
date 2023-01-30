@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <%- include("inc/head/head") -%>
+<body>
+
+    <%- include("inc/header/alertsCustom")-%>
+    <%- include("modals/modalTravaTela")-%>
+    
+    <section>
+        <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+            <div class="row " >
+                <div class=" col-sm-12  loginBox justify-content-center" >
+
+                    <br>
+                    <div class="col-sm-12 loginBox2 ">
+                        <div class="col-sm-12 loginBox3">
+                            <form action="" id="formLogin">
+                                <label for="lbUsuario" class="lbLogin"><b>Usuario</b></label>
+                                <input type="text"  class="form-control" id="user" placeholder="Digite seu usuario">
+        
+                                <br>
+        
+                                <label for="lbUsuario" class="lbLogin"><b>Senha</b></label>
+                                <input type="password"  class="form-control" id="password" placeholder="Digite sua senha">
+                                <br>
+                                <button type="submit" class="btLogin" id="btnEnviar"> Entrar</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                    <br>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include("inc/footer-scripts/footer-scripts")-%>
+   
+</body>
+</html>

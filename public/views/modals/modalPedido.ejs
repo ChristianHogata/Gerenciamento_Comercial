@@ -1,0 +1,114 @@
+
+
+
+
+
+<div class="modal fade" id="Modal1" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Selecione o Produto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div name="List1" >
+                <div class="row">
+                    <div class="col-sm-10" id="SearchBox">
+                        <input class="form-control Produtos" type="text" placeholder="Digite o nome do produto" name="Produtos">
+                    </div>
+
+                    <div class="col-sm-2"> 
+                        <button class="btn btn-primary form-control" name="Produtos" id="search">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                          </svg>
+                        </button>
+                    </div>
+                    
+                    
+    
+                </div>
+    
+                <br>
+    
+                  <div class="row">
+                    <div class="table-responsive" style="height: 25vh;">
+                        <table class="table table-hover tablesorter table-sm table-bordered m-0 tbProduto">
+                            <thead>
+                                <tr class="listarCabecalho" style="text-align: center;">
+                                  <th class="col-xs text-center header" scope="col">Código</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Nome</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Saldo</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Valor</th>
+                                </tr>
+                            </thead>
+                          <tbody id="tbProduto" style="text-align: center;">
+    
+                            
+                            
+                           
+                          </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>	
+                </div>	
+              </div>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="Modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Selecione a quantidade</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label for="codigo">Código</label>
+                    <input class="form-control" name="id" type="text" id="id" disabled>
+                </div>
+                
+                <div class="col-sm-3">
+                    <label for="situacao">Quantidade</label>
+                    <input class="form-control" name="qtd" type="number" id="qtd" value="1">
+                </div>
+            
+
+                <div class="col-sm-4">
+                    <label for="grupo">Valor Unitario</label>
+                    <input class="form-control" name="valor_venda" type="text" id="valor_venda" disabled>
+                </div>
+                
+                <div class="col-sm-3">
+                    <label for="sub_Grupo">Valor Total</label>
+                    <input class="form-control" name="valor_total" type="text" id="valor_total"disabled value="¥0"> 
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary"  id="btnModal3" disabled style="display: none;">Adicionar Complemento</button>
+          <button class="btn btn-primary"  id="btnModal2">Concluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+

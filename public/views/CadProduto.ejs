@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("inc/head/head") -%>
+<body>
+
+    <%- include("inc/header/nav_menu")-%>
+    <%- include("inc/header/alertsCustom")-%>
+    <%- include("modals/modalTravaTela")-%>
+    
+
+<div class="container  align-items-center justify-content-center" style="height: 100vh;">
+
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active"  data-toggle="tab" href="#Pesquisa" role="tab" aria-controls="pesquisa" aria-selected="true">Pesquisa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#dados" role="tab" aria-controls="dados" aria-selected="true">Novo Registro</a>
+                </li>
+                
+            </ul>
+        </div>
+
+        <div class="card-body">
+        
+            <br>
+            <div name="Data" style="display: none;">
+            
+                <form name="form" class="CadForm" action="/produtos" method="POST" id="formCad">
+        
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="codigo">Código</label>
+                                <input class="form-control" name="id" type="text" id="id" disabled>
+                            </div>
+                            
+                            <div class="col-sm-3">
+                                <label for="situacao">Situação</label>
+                                <select class="form-control" name="situacao" id="situacao" disabled data-tipoDado="number">
+                                    <option value="N" selected="selected"></option>
+                                    <option value="1">Ativo</option>
+                                    <option value="0">Inativo</option>
+                                </select>
+                            </div>
+                        
+
+                            <div class="col-sm-3">
+                                <label for="grupo">Grupo</label>
+                                <select class="form-control" name="grupo" id="grupo" disabled data-tipoDado="number">
+                                    <option value="N" selected="selected"></option>
+                                    <option value="1">Bebidas</option>
+                                    <option value="2">Pizzas</option>
+                                    <option value="3">Outros</option>
+                                
+                                </select>
+                            </div>
+
+                            
+                        </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <label for="descricao">Descricao</label>
+                            <br>
+                            <input class="form-control" name="descricao"  type="text" placeholder="descricao" disabled data-tipoDado="string">
+                        </div>
+                    </div>
+
+                
+
+
+                    <br>
+
+                    
+
+                  
+
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <label for="ean">Código de Barras</label>
+                            <input class="form-control" name="ean" inputmode="numeric" type="text" id="ean" disabled data-tipoDado="number">
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="peso_bruto">Peso Bruto</label>
+                            <input class="form-control" name="peso_bruto" inputmode="numeric" type="number" id="peso_bruto"  disabled data-tipoDado="number">
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="peso_liquido">Peso Liquido</label>
+                            <input class="form-control" name="peso_liquido" inputmode="numeric" type="number" id="peso_liquido"  disabled data-tipoDado="number">
+                        </div>
+                        
+
+                        <div class="col-sm-3">
+                            <label for="unidade_entrada">Unidade Entrada</label>
+                            <select class="form-control" name="unidade_entrada" id="unidade_entrada" disabled data-tipoDado="number">
+                                <option value="N" selected="selected"></option>
+                                <option value="1">UN</option>
+                                <option value="2">CX</option>
+                            </select>
+                        </div>
+
+                        
+                    </div>
+
+                    
+                    <br>
+
+
+
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <label for="preco_custo">Preço Custo</label>
+                            <input class="form-control" name="preco_custo" type="number" inputmode="numeric" id="preco_custo"  disabled data-tipoDado="number">
+                        </div>
+
+
+                        <div class="col-sm-3">
+                            <label for="preco_venda">Preço Venda</label>
+                            <input class="form-control" name="preco_venda" inputmode="numeric" type="number" id="preco_venda"  disabled data-tipoDado="number">
+                        </div>
+
+
+
+
+                        <div class="col-sm-3">
+                            <label for="estoque">Estoque</label>
+                            <input class="form-control" name="estoque" inputmode="numeric" type="number" id="estoque"  disabled data-tipoDado="number">
+                        </div>
+
+                       
+
+                        <div class="col-sm-3">
+                            <label for="quantidade_minima">Quantidade Minima</label>
+                            <input class="form-control" name="quantidade_minima" inputmode="numeric" type="number" id="quantidade_minima"  disabled data-tipoDado="number">
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+
+
+                        <div class="col-sm-3">
+                            <label for="complemento">Usa Complementos</label>
+                            <select class="form-control" name="complemento" id="complemento" required disabled data-tipoDado="string">
+                                <option value="0" selected="selected"></option>
+                                <option value="S">Sim</option>
+                                <option value="N">Nao</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-sm-3">
+                            <label for="fracionado">Fracionado</label>
+                            <select class="form-control" name="fracionado" id="fracionado" required disabled data-tipoDado="string">
+                                <option value="0" selected="selected"></option>
+                                <option value="S">Sim</option>
+                                <option value="N">Nao</option>
+                            </select>
+                        </div>
+
+                       
+
+
+                        <div class="col-sm-3">
+                            <label for="quantidade_sabores">Quantidade de sabores</label>
+                            <select class="form-control" name="quantidade_sabores" id="quantidade_sabores" required disabled data-tipoDado="number">
+                                <option value="N" selected="selected"></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    
+
+
+
+                    <br>
+
+                    <div class="modal-footer  bg-light" id="btns">
+                        
+                    </div> 
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+            <div name="List" >
+                <div class="row">
+                    <div class="col-sm-10" id="SearchBox">
+                        <input class="form-control Produtos" type="text" placeholder="Digite o nome do Produto" name="Produtos">
+                    </div>
+    
+                    <div class="col-sm-2"> 
+                        <button class="btn btn-primary form-control" name="Produtos" id="search">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                          </svg>
+                        </button>
+                    </div>
+    
+                  </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="table-responsive" style="height: 50vh;">
+                        <table class="table table-hover tablesorter table-sm table-bordered m-0 tabela" id="listaClientes">
+                            <thead>
+                                <tr class="listarCabecalho">
+                                  <th class="col-xs text-center header" scope="col">Código</th>
+                                  <th class="col-xs header text-center" scope="col">Descrição</th>
+                                  <th class="col-xs header text-center" scope="col">Preço de Custo</th>
+                                  <th class="col-xs header text-center" scope="col">Preço de Venda</th>
+                                  <th class="col-xs text-center header" scope="col">Estoque</th>
+                                </tr>
+                            </thead>
+                        
+                        <tbody>
+
+                            <% object.forEach(function(row){ %>
+
+                            
+
+                            <tr class="zebra grid">
+                                <th scope="row" name="codigo" class="col-xs text-center"><%= row.id %></th>
+                                <td class="col-xs"><%= row.descricao %></td>
+                                <td class="col-xs">¥<%= row.preco_custo %></td>
+                                <td class="col-xs">¥<%= row.preco_venda %></td>
+                                <td class="col-xs"><%= row.estoque %></td>
+                            </tr>
+
+                           <% }); %>
+
+                        </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>	
+                </div>  
+            </div>
+        </div>
+    </div>
+ </div>       
+ <%- include("inc/footer-scripts/footer-scripts")-%>
+
+</body>
+</html>

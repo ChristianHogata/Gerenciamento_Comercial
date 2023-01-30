@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<%- include("inc/head/headLogin") -%>
+
+<body>
+
+  <%- include("inc/header/alertsCustom")-%>
+  <%- include("modals/modalTravaTela")-%>
+
+<!-- partial:index.partial.html -->
+<div id="bg" class="img-fluid" alt="Responsive image"></div>
+
+<section>
+  <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="row " >
+      <div class="col-sm-12">
+        <form action="" id="formLogin">
+          <div class="form-field">
+            <input type="text" class="form-control" id="user" placeholder="Digite seu usuario" required/>
+          </div>
+                        
+          <div class="form-field">
+            <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required/>                         
+          </div>
+                        
+          <div class="form-field">
+            <button class="btn btLogin"  id="btnEnviar" type="submit">Entrar</button>
+          </div>
+        </form>  
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<%- include("inc/footer/footer")-%>
+  <%- include("inc/footer-scripts/footer-scripts")-%>
+</body>
+</html>

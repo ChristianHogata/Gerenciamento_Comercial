@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg navbar-light "  >
+  
+  
+  
+    <a class="navbar-brand" href="home" style="color: white;">MokuTech</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  
+      <ul class="navbar-nav" id="Menu">
+  
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                Cadastro
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/clientes">Clientes</a></li>
+                <li><a class="dropdown-item" href="/fornecedores" >Fornecedores</a></li>
+                <li><a class="dropdown-item" href="/produtos" >Produtos</a></li>
+              </ul>
+          </li>
+  
+  
+  
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                Movimento
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" >Pedido</a></li>
+                <li><a class="dropdown-item" href="#" >Entrada de Estoque</a></li>
+              </ul>
+          </li>
+  
+  
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                Financeiro
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" >Contas a Pagar</a></li>
+                <li><a class="dropdown-item" href="#" >Contas a Receber</a></li>
+              </ul>
+          </li>
+
+
+
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                Caixa
+              </a>
+              <ul class="dropdown-menu">
+                <li><a name="abrir_caixa" class="dropdown-item"  >Abrir Caixa</a></li>
+                <li><a name="fechar_caixa" class="dropdown-item" >Fechar Caixa</a></li>
+              </ul>
+          </li>
+  
+  
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                Relatórios
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" >Vendas</a></li>
+                <li><a class="dropdown-item" href="#" >Entradas</a></li>
+                <li><a class="dropdown-item" href="#" >Estoque</a></li>
+              </ul>
+          </li>
+  
+  
+      </ul>
+  
+    </div>
+  
+ 
+  </nav>
+
+  <%- include("../../modals/modalAberturaCaixa")-%>
+  <%- include("../../modals/modalFechamentoCaixa")-%>
+ 
+  <br>
+
+  

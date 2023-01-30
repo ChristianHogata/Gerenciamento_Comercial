@@ -1,0 +1,94 @@
+
+
+
+
+
+<div class="modal fade" id="ModalVendas" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" >
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel" >Selecione a Venda</h1>
+          <button type="button" class="btn-close" id="closeModalConsultaVendas"></button>
+        </div>
+        <div class="modal-body">
+            <div name="List1" >
+                <div class="row">
+                    <div class="col-sm-7" id="SearchBox">
+                        <input class="form-control Vendas" type="number" placeholder="Digite o código ou data da venda" name="Vendas" id="TbVendas">                  
+                    </div>
+                    
+                    
+                    <div class="col-sm-3" class="form-check">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="value" id="codigo"  checked>
+                        <label class="form-check-label" for="codigo">
+                          Código
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="value" id="data">
+                        <label class="form-check-label" for="data">
+                          Data
+                        </label>
+                      </div>
+         
+
+                    </div>
+                    
+                    
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary form-control" name="Vendas" id="search"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                      </svg>
+                    </button>
+                    </div>
+                    
+    
+                </div>
+    
+                <br>
+    
+                  <div class="row">
+                    <div class="table-responsive" style="height: 25vh;">
+                        <table class="table table-hover tablesorter table-sm table-bordered m-0 tbVendas" >
+                            <thead>
+                                <tr class="listarCabecalho" style="text-align: center;">
+                                  <th class="col-xs text-center header" scope="col">Código</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Cliente</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Valor</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Data</th>
+                                  <th class="col-xs header headerSortDown" scope="col">Situação</th>
+                                  <th class="col-xs header headerSortDown" scope="col"></th>
+                                </tr>
+                            </thead>
+                          <tbody id="tbVendas" style="text-align: center;">
+    
+                            
+                            
+                           
+                          </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>	
+                </div>	
+              </div>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+

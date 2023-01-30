@@ -1,0 +1,33 @@
+{
+    "short_name": "Mokutech",
+    "name": "Mokutech PDV",
+    "description": "Gerenciador comercial",
+    "icons": [
+        {
+            "src": "../../../inc/img/mokuteck_icon2.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "../../../inc/img/mokuteck_icon.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "any maskable"  
+        } 
+    ],
+    "start_url": ".",
+    "background_color": "#9e0be6",
+    "display": "fullscreen",
+    "orientation": "portrait-primary",
+    "theme_color": "black",
+    "shortcuts": [
+        {
+            "name": "Mokutech Soluções",
+            "short_name": "Mokuteck",
+            "description": "Gerenciador comercial",
+            "url": "?source=pwa",
+            "icons": [{ "src": "../../../inc/img/mokuteck_icon2.png", "sizes": "192x192"}]
+        }
+    ]
+}
