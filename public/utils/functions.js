@@ -541,7 +541,7 @@ class functions{
                                         break;
         
                                         case "valor_inicial":
-                                            caixa_abertura.valor_inicial = el.value;
+                                            caixa_abertura.valor_inicial = el.value.replace('¥','');
                                         break;
                                         
                                     }
@@ -588,15 +588,15 @@ class functions{
                                         break;
         
                                         case "dinheiro":
-                                            caixa_fechamento.dinheiro = el.value;
+                                            caixa_fechamento.dinheiro = el.value.replace('¥','');
                                         break;
 
                                         case "credito":
-                                            caixa_fechamento.credito = el.value;
+                                            caixa_fechamento.credito = el.value.replace('¥','');
                                         break;
 
                                         case "debito":
-                                            caixa_fechamento.debito = el.value;
+                                            caixa_fechamento.debito = el.value.replace('¥','');
                                         break;
 
                                        
@@ -742,6 +742,28 @@ class functions{
             });
 
 
+        }
+        if(window.location.pathname == "/home"){
+            let dinheiro = document.querySelector('#dinheiro');
+            let credito = document.querySelector('#credito');
+            let debito = document.querySelector('#debito');
+            let valor_inicial = document.querySelector('#valor_inicial');
+
+            dinheiro.addEventListener('keyup', el=>{
+                dinheiro.value = '¥' + dinheiro.value.replace('¥','');
+            });
+
+            credito.addEventListener('keyup', el=>{
+                credito.value = '¥' + credito.value.replace('¥','');
+            });
+
+            debito.addEventListener('keyup', el=>{
+                debito.value = '¥' + debito.value.replace('¥','');
+            });
+
+            valor_inicial.addEventListener('keyup', el=>{
+                valor_inicial.value = '¥' + valor_inicial.value.replace('¥','');
+            });
         }
         
     }
@@ -1203,7 +1225,6 @@ class functions{
     
                 el.addEventListener('click', ()=>{
         
-                    
                     $('#Modal1').modal('hide');
                     $('#Modal2').modal('show');
                     this.addProductQtd(el.dataset.id);
@@ -1230,7 +1251,7 @@ class functions{
         
                 el.addEventListener('click', ()=>{
 
-                    alert(el.dataset.id);
+                    
         
                 })
         
@@ -1305,7 +1326,7 @@ class functions{
             btnComplemento.disabled = true;  
         }
 
-        if((produtos.fracionado == "S") || (produtos.quantidade_sabores == "1")){
+        if((produtos.fracionado == "S") || (produtos.quantidade_sabores > 1)){
             
             this.ajax2('GET',window.location.href + '/' + "sabores" + '/' + 'all', "Sabores",produtos);
             $('#Modal4').modal('show');
