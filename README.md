@@ -10,3 +10,6 @@
  - これはお店のシステムです！作っていますので終わらなかった。知りたいならリンクを押す！
  
  - https://youtu.be/CXwwrmWivvI
+
+ - ![LigthHouse analytics](https://i.imgur.com/muA04FK.png)
+ - ![PWA Checked](https://i.imgur.com/M9W4MsN.png)
