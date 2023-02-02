@@ -1,7 +1,7 @@
 # Gerenciamento Comercial (PWA)
 # Sales System Store (PWA)
 # お店のシステム (PWA)
-  - Sistema de gerenciamento comercial para empresas de pequeno e médio porte japonesas.
+  - Sistema de gerenciamento comercial para empresas de pequeno e médio porte brasileiras no Japão.
   O sistema também funciona como uma PWA ou seja, se comporta como aplicação nativa em Desktop e mobile.
   O mesmo encontra-se em desenvolvimento, para mais informações, clique no link:
 
