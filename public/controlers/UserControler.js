@@ -203,7 +203,7 @@ class UserControler {
             case "select":
 
                 if(table == '"Produtos"'){
-                    conn.select('select * from' + ' ' + table  + ' ' + 'where id =' + ' ' + id).then((results,reject)=>{
+                    conn.select('select * from' + ' ' + table  + ' ' + 'where id =' + ' ' + id ).then((results,reject)=>{
 
                         if(results){
                             this.ShowData(res,'data',results);
@@ -435,35 +435,121 @@ class UserControler {
             break;
 
 
+            case "Historico":
+                conn.select(query.query1).then((results,reject)=>{
+
+                    if(results){
+                        this.ShowData(res,'data',results);
+                    }               
+        
+                }).catch(()=>{
+                    this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                });
+                
+            break;
+
+            
+            
+            case "HistoricoItens":
+                console.log('chegou2');
+                conn.select(query.query1).then((results,reject)=>{
+
+                    if(results){
+                        this.ShowData(res,'data',results);
+                    }               
+        
+                }).catch(()=>{
+                    this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                });
+                
+            break;
+
+
 
 
             case "all":
 
                 if(table2 == ""){
-                    if(id == "Vendas"){
-                        conn.select('select * from' + ' ' + table  + ' ' + 'order by id desc').then((results,reject)=>{
+                    switch(id){
+                        case 'Vendas':
+                            conn.select('select * from' + ' ' + table  + ' ' + 'order by id desc limit 10').then((results,reject)=>{
 
-                            if(results){
-                                this.ShowData(res,'data',results);
-                            }
-    
-                        }).catch(()=>{
-                            this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
-                        });
-                    }
-                    else{
-                        conn.select('select * from' + ' ' + table  + ' ').then((results,reject)=>{
+                                if(results){
+                                    this.ShowData(res,'data',results);
+                                }
+        
+                            }).catch(()=>{
+                                this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                            });
+                        break;
 
-                            if(results){
-                                this.ShowData(res,'data',results);
-                            }
-                          
-                
-                        }).catch(()=>{
-                            this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
-                        });
-                    }
+                        case 'produtos':
+                            conn.select('select * from' + ' ' + table  + ' ' + 'order by descricao limit 10').then((results,reject)=>{
+
+                                if(results){
+                                    this.ShowData(res,'data',results);
+                                }
+                              
                     
+                            }).catch(()=>{
+                                this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                            });
+                        break;
+
+                        case 'clientes':
+                            console.log('chegoooou');
+                            conn.select('select * from' + ' ' + table  + ' ' + 'order by nome limit 10').then((results,reject)=>{
+
+                                if(results){
+                                    this.ShowData(res,'data',results);
+                                }
+                              
+                    
+                            }).catch(()=>{
+                                this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                            });
+                        break;
+
+                        case 'Sabores':
+                            conn.select('select * from' + ' ' + table  + ' ' + 'order by descricao limit 10').then((results,reject)=>{
+
+                                if(results){
+                                    this.ShowData(res,'data',results);
+                                }
+                              
+                    
+                            }).catch(()=>{
+                                this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                            });
+                        break;
+
+                        case 'complementos':
+                            conn.select('select * from' + ' ' + table  + ' ' + 'order by descricao limit 10').then((results,reject)=>{
+
+                                if(results){
+                                    this.ShowData(res,'data',results);
+                                }
+                              
+                    
+                            }).catch(()=>{
+                                this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                            });
+                        break;
+
+                        default:
+                            conn.select('select * from' + ' ' + table  + ' ').then((results,reject)=>{
+
+                                if(results){
+                                    this.ShowData(res,'data',results);
+                                }
+                              
+                    
+                            }).catch(()=>{
+                                this.ShowMessage(res,'error',"Houve um erro ao buscar os dados, contate o suporte!");
+                            });
+                        break;
+
+                    }  
                 }
                 else{
                     conn.select('SELECT * FROM public."Clientes" inner join "Endereco" on id = id_usuario').then((results,reject)=>{
@@ -591,7 +677,7 @@ class UserControler {
             break;
 
             case 'Cupom':
-                conn.select(query.query1).then((results,reject)=>{
+                conn.select(query).then((results,reject)=>{
 
                     if(results){
                         this.ShowData(res,'data',results);

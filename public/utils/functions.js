@@ -100,7 +100,21 @@ class functions{
 
     
     
-    
+    loadClientList(timer){
+        this.ajax2('GET',window.location.href + '/' + "clientes" + '/' + 'all', "Clientes" );
+        setTimeout(() => {
+            $('#ModalClient').modal('show'); 
+                                    
+        }, timer); 
+        
+        setTimeout(() => {
+            this.showHistorico(); 
+                                    
+        }, 1000); 
+    } 
+
+
+   
     
 
 
@@ -119,10 +133,8 @@ class functions{
                     switch(el.id){
                        
                         case "addClient":
-                            this.ajax2('GET',window.location.href + '/' + "clientes" + '/' + 'all', "Clientes" );
-                            setTimeout(() => {
-                                $('#ModalClient').modal('show'); 
-                            }, 1000);     
+                            this.loadClientList(1000); 
+                            
                         break;
     
                         case "codigo":
@@ -332,9 +344,9 @@ class functions{
                                 bt.disabled = true; 
                                 this.geraPedido(bt,"delivery");
                             break;
-
         
                             case "search":
+
         
                                 let input = document.querySelector("."+bt.name);
                                 
@@ -394,6 +406,73 @@ class functions{
                                 tela_impressao.window.close();
 
                             break;
+
+
+                            case "btnCancelarImpressao":
+                                $('#ModalCupom').modal('hide');
+                                this.showAlert('Sucesso!',"Pedido finalizado!","alert-success",'yes',window.location.href);
+                            break;
+
+
+                            case "btnVoltarHistoricoCliente":
+                                $('#ModalHistoricoPdItens').modal('hide');
+                                this.loadClientList(0);
+                                bt.disabled = true;
+                            break;
+
+                            
+                            case "btnVoltarListaCliente":
+                                $('#ModalHistoricoCliente').modal('hide');
+                                this.loadClientList(0); 
+                                bt.disabled = true;
+                            break;
+
+                            case "btnVoltarLista":
+            
+
+                               switch(bt.dataset.modal){
+                                    case 'ModalClient':
+                                     
+                                        let data = {
+                                            value: '',
+                                            table: 'Clientes',
+                                            data: "",
+                                            search: '*'
+                                        }
+
+                                        this.ajax2('GET',window.location.href + '/' + JSON.stringify(data) + '/' + "search" , data.table);
+
+                                    break;
+
+                                    case 'Modal1':
+                                        let data2 = {
+                                            value: '',
+                                            table: 'Produtos',
+                                            data: "",
+                                            search: '*'
+                                        }
+
+                                        this.ajax2('GET',window.location.href + '/' + JSON.stringify(data2) + '/' + "search" , data2.table);
+
+                                    break;
+
+                                    case 'ModalVendas':
+                                        let data3 = {
+                                            value: '',
+                                            table: 'Vendas',
+                                            data: "",
+                                            search: '*'
+                                        }
+
+                                        this.ajax2('GET',window.location.href + '/' + JSON.stringify(data3) + '/' + "search" , data3.table);
+
+                                    break;
+                                }
+                               
+                                
+                            break;
+                            
+                            
                         }
                     })
                 })
@@ -959,6 +1038,28 @@ class functions{
     }
 
 
+    ImprimirVenda(){
+        let btnImpVenda = document.querySelectorAll('#btnImp');
+        
+        
+        if(btnImpVenda[0]){
+            btnImpVenda.forEach(el=>{
+                el.addEventListener("click", bt=>{
+                    let coluna = el.parentNode;
+                    let idVenda = coluna.parentNode;
+                    let btnCancelar = document.querySelector('#btnCancelarImpressao');
+                    btnCancelar.style.display = 'none';
+
+                    this.createCupom('GET', window.location.href.replace(window.location.pathname,'/GetCupom/') + 'Cupom' + '/' + idVenda.dataset.id);
+
+                })
+            })
+
+            //btnCancelar.style.display = '';
+        }
+    }
+
+
 
 
     payMethodAdd(){
@@ -1196,12 +1297,8 @@ class functions{
         let tableProduto = document.querySelectorAll('.tbProduto> tbody > tr');
         let tabelaCliente = document.querySelectorAll('.tbClient > tbody > tr ');
         let tabelaVendas = document.querySelectorAll('.tbVendas > tbody > tr ');
-        
-
-        
-
-        
-       
+        let tabelaHistorico = document.querySelectorAll('.tbHistorico > tbody > tr');
+   
         if(window.location.pathname != "/pedidos"){
             table.forEach(el=>{
     
@@ -1215,6 +1312,9 @@ class functions{
                   
                     this.ajax('GET',window.location.href + '/' + el.querySelector('th[name="codigo"]').innerHTML+ '/' +'select'); 
                    
+                    el.removeEventListener('click', ()=>{
+
+                    });
         
                 })
         
@@ -1224,40 +1324,50 @@ class functions{
             tableProduto.forEach(el=>{
     
                 el.addEventListener('click', ()=>{
-        
                     $('#Modal1').modal('hide');
                     $('#Modal2').modal('show');
                     this.addProductQtd(el.dataset.id);
-                    
+                    console.log(el);
+                });
         
-                })
         
-            })
+            });
     
     
             tabelaCliente.forEach(el=>{
+               
         
-                el.addEventListener('click', ()=>{
-
+                el.addEventListener('click',  ()=>{
                     this.addInputData(el.dataset.id, "#addClient");
-                    $('#ModalClient').modal('hide');
-        
-                })
-        
-            })
-
-
-            tabelaVendas.forEach(el=>{
-        
-                el.addEventListener('click', ()=>{
-
+                    console.log(el); 
                     
+                });
+
+            
+            });
+
+
         
-                })
+            
+            tabelaHistorico.forEach(el=>{
+
+                
+                el.addEventListener('click', ()=>{
+                    this.ajax2('GET',window.location.href + '/' + el.dataset.id  + '/' + "HistoricoItens","HistoricoItens")
         
+                    setTimeout(() => {
+                        $('#ModalHistoricoCliente').modal('hide');
+                        $('#ModalHistoricoPdItens').modal('show');
+                    }, 1000);    
+                });
+            
+                
             })
+
+            
         }  
     }
+
     
 
 
@@ -1629,8 +1739,12 @@ class functions{
                     case "Pedido finalizado!":
                         if(confirm('Deseja imprimir o cupom?')){
                             //let pedido = JSON.parse(sessionStorage.getItem("Pedido"));
-                            
-                            this.createCupom('GET', window.location.href + '/Cupom');
+                            console.log(window.location.href.replace(window.location.pathname,'/GetCupom/FinalizouVenda/0'));
+                            document.querySelector('.btnCloseModalCupom').disabled = true;
+                            document.querySelector('#btnCancelarImpressao').style.display = 'block';
+
+                           
+                            this.createCupom('GET',window.location.href.replace(window.location.pathname,'/GetCupom/FinalizouVenda/0'));
                              
                         }
                         else{
@@ -1729,7 +1843,14 @@ class functions{
                     sessionStorage.setItem("Vendas", JSON.stringify(obj1));
                     this.CreateTable(document.getElementById('tbVendas'),obj1,"Vendas",produto);
                 break;
-                
+
+                case "Historico":
+                    this.CreateTable(document.getElementById('tbHistorico'),obj1,"Historico",produto);
+                break;
+               
+                case "HistoricoItens":
+                    this.CreateTable(document.getElementById('tbHistoricoItens'),obj1,"HistoricoItens",produto);
+                break;
                 
             }
         }
@@ -1752,24 +1873,116 @@ class functions{
                 let id = document.createElement('td');
                 let nome = document.createElement('td');
                 let sobrenome = document.createElement('td');
+                let historico = document.createElement('td');
+                let btnHistorico = document.createElement('button');
 
                 tr.dataset.id = obj.id;
                 tr.classList.add ='zebra grid';
                 id.classList.add('col-sm-2');
                 nome.classList.add('col-sm-2');
                 sobrenome.classList.add('col-sm-2');
+                historico.classList.add('col-sm-2');
+               
+                btnHistorico.style.border = "none";
+                btnHistorico.style.color = "blue";
+                btnHistorico.id = "btnHistorico";
+                btnHistorico.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>`;
 
                 id.appendChild(document.createTextNode(obj.id));
                 nome.appendChild(document.createTextNode(obj.nome));
                 sobrenome.appendChild(document.createTextNode(obj.sobrenome));
+                historico.appendChild(btnHistorico);
 
                 table.appendChild(tr);
                 tr.appendChild(id);
                 tr.appendChild(nome);
                 tr.appendChild(sobrenome);
+                tr.appendChild(historico);
+                
+
+                
+                
 
                     
             }
+
+
+
+            if(tableName == "Historico"){
+
+                let tr = document.createElement('tr');
+                let Pedido = document.createElement('td');
+                let Cliente = document.createElement('td');
+                let Valor = document.createElement('td');
+                let Data = document.createElement('td');
+                
+
+                tr.dataset.id = obj.id;
+                tr.classList.add ='zebra grid';
+                Pedido.classList.add('col-sm-2');
+                Cliente.classList.add('col-sm-2');
+                Valor.classList.add('col-sm-2');
+                Data.classList.add('col-sm-2');
+                
+               
+
+                Pedido.appendChild(document.createTextNode(obj.id));
+                Cliente.appendChild(document.createTextNode(obj.nome));
+                Valor.appendChild(document.createTextNode(obj.valor_total));
+                Data.appendChild(document.createTextNode(obj.data_pedido));
+                
+
+                
+                table.appendChild(tr);
+                tr.appendChild(Pedido);
+                tr.appendChild(Cliente);
+                tr.appendChild(Valor);
+                tr.appendChild(Data);
+
+            }
+
+
+            if(tableName == "HistoricoItens"){
+
+                let tr = document.createElement('tr');
+                let Descricao = document.createElement('td');
+                let Sabores = document.createElement('td');
+                let Complementos = document.createElement('td');
+                let Quantidade = document.createElement('td');
+                
+
+                tr.dataset.id = obj.id;
+                tr.classList.add ='zebra grid';
+                Descricao.classList.add('col-sm-2');
+                Sabores.classList.add('col-sm-2');
+                Complementos.classList.add('col-sm-2');
+                Quantidade.classList.add('col-sm-2');
+                
+                (obj.estoque == '' ? obj.estoque : 0 )
+
+                Descricao.appendChild(document.createTextNode(obj.descricao_produto));
+                Sabores.appendChild(document.createTextNode((obj.descricao_sabor == '' ? 'Não' : obj.descricao_sabor)));
+                Complementos.appendChild(document.createTextNode((obj.descricao_complemento == '' ? 'Não' : obj.descricao_complemento )));
+                Quantidade.appendChild(document.createTextNode(obj.quantidade_produto));
+                
+
+                
+                table.appendChild(tr);
+                tr.appendChild(Descricao);
+                tr.appendChild(Sabores);
+                tr.appendChild(Complementos);
+                tr.appendChild(Quantidade);
+
+                
+               
+                    
+            }
+
+
 
             if(tableName == "Complementos"){
 
@@ -1801,6 +2014,8 @@ class functions{
                 tr.appendChild(nome);
                 tr.appendChild(valor);
                 tr.appendChild(checkbox);
+
+                
 
                     
             }
@@ -1840,6 +2055,7 @@ class functions{
                 tr.appendChild(valor);
                 tr.appendChild(checkbox);
 
+                
             }
 
             if(tableName == "Produtos"){
@@ -1866,6 +2082,8 @@ class functions{
                 tr.appendChild(nome);
                 tr.appendChild(saldo);
                 tr.appendChild(valor);
+
+               
        
             
             }
@@ -1914,6 +2132,8 @@ class functions{
                 /* console.log(table);
                 console.log(object);
                 console.log(tableName);*/
+
+              
                     
             
             }
@@ -1962,8 +2182,10 @@ class functions{
                 let data = document.createElement('td');
                 let situacao = document.createElement('td');
                 let btnCel = document.createElement('td');
+                let btnCel2 = document.createElement('td');
                 let btn = document.createElement('button');
                 let nul = document.createElement('td');
+                let btnImp = document.createElement('button');
                     
                     
 
@@ -1976,6 +2198,7 @@ class functions{
                 data.classList.add('col-sm-2');
                 situacao.classList.add('col-sm-2');
                 nul.classList.add('col-sm-2');
+                
                 btnCel.classList.add('col-sm-2');
                 btn.style.border = "none";
                 btn.style.color = "red";
@@ -1986,12 +2209,26 @@ class functions{
                 <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
                 </svg>`;
 
+                btnCel2.classList.add('col-sm-2');
+                btnImp.style.border = "none";
+                btnImp.name = "btnImp";
+                btnImp.style.color = "green";
+                btnImp.id = "btnImp";
+                btnImp.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-clipboard2-check" viewBox="0 0 16 16">
+                <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+                <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+                <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3Z"/>
+                </svg>`;
+
+
+
                 id.appendChild(document.createTextNode(obj.id));
                 cliente.appendChild(document.createTextNode(obj.nome_cliente));
                 valor.appendChild(document.createTextNode("¥" + obj.valor_total));
                 data.appendChild(document.createTextNode(obj.data_pedido));
                 nul.appendChild(document.createTextNode(""));
                 situacao.appendChild(document.createTextNode((obj.status_pedido == 1 ? "Concluido" : "Cancelado")));
+                btnCel2.appendChild(btnImp);
                 btnCel.appendChild(btn);
 
                 table.appendChild(tr);
@@ -2003,17 +2240,24 @@ class functions{
  
                 if(obj.status_pedido == 2){
                     tr.style.color = "red";
+                    tr.appendChild(btnCel2);
                     tr.appendChild(nul);
                 }
                 else{
+                    tr.appendChild(btnCel2);
                     tr.appendChild(btnCel);
                 }      
             }  
         })
 
+        
+        this.deleteVenda();
+        this.ImprimirVenda(); 
+        this.deleteItens();
         this.onCelClick();
-        this.deleteVenda(); 
-        this.deleteItens();       
+        
+        
+              
     }
 
     
@@ -2042,6 +2286,15 @@ class functions{
         
             let tableBody = document.getElementById('produtosCupomBody');
             let tableFooter = document.querySelectorAll('#produtosCupomFooter > tr > td');
+            let EnderecoCliente = document.querySelector('#enderecoCliente');
+            let dataHoraPedido = document.querySelector('#dataHoraPd');
+
+            EnderecoCliente.innerHTML = `${obj1[0].provincia} - ${obj1[0].cidade} 
+                
+                ${obj1[0].endereco} ${obj1[0].numero} ${obj1[0].cep} - ${obj1[0].referencia}
+            `;    
+        
+            dataHoraPedido.innerHTML = `${obj1[0].data_pedido}  ${obj1[0].hora_pedido} `; 
     
     
             obj1.forEach(el=>{
@@ -2069,8 +2322,12 @@ class functions{
                     case 'total':
                         el.innerHTML = '¥' + obj1[0].valor_total;
                     break;
+
+                    case 'FormaPgtNome':
+                        el.innerHTML = obj1[0].formapgtnome;
+                    break;
     
-                    case 'PagDinheiro':
+                    case 'FormaPgt':
                         el.innerHTML = '¥' + obj1[0].valor_pago;
                     break;
     
@@ -2081,8 +2338,26 @@ class functions{
                     case 'NumPedido':
                         el.innerHTML = 'Pedido:' + ' ' + obj1[0].id;  
                     break;
+
+                    case 'PedidoTipoEntrega':
+
+                        
+                            if(obj1[0].balcao == 'S'){
+                                el.style.color = 'green';
+                                el.innerHTML = 'Balcão'
+                                el.style.fontSize = "25px";
+                            } 
+                            else{
+                                el.style.color = 'red';
+                                el.innerHTML = 'Delivery'
+                                el.style.fontSize = "25px";    
+                            }
+                    break;
                 }
             })
+
+             
+            
             
             $('#ModalCupom').modal({
                 backdrop: 'static',
@@ -2097,12 +2372,41 @@ class functions{
         }
         ajax.send();
 
-    }    
-
+    }  
     
-
-
+    
+    showHistorico(){
         
+        let btnHistorico = document.querySelectorAll('#btnHistorico');
+        let btnVoltarHistoricoCliente = document.querySelector('#btnVoltarHistoricoCliente');
+        let btnVoltarListaCliente = document.querySelector('#btnVoltarListaCliente');
+
+        btnVoltarHistoricoCliente.disabled = false;
+        btnVoltarListaCliente.disabled = false;
+
+        if(btnHistorico[0]){
+            btnHistorico.forEach(el=>{
+                
+                el.addEventListener('click', ()=>{
+                    el.disabled = true;
+                    let coluna = el.parentNode;
+                    let idCliente = coluna.parentNode;
+                    
+                    this.ajax2('GET',window.location.href + '/' + idCliente.dataset.id  + '/' + "Historico","Historico");
+                    
+                    setTimeout(() => {
+                        $('#ModalClient').modal('hide');
+                        $('#ModalHistoricoCliente').modal('show');
+                    }, 1000);
+                        
+                });  
+            })
+        }
+    }
+
+
+   
+     
         
 
     

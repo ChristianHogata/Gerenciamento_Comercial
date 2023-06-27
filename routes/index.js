@@ -123,6 +123,44 @@ router.get('/pedidos/:method', function(req, res, next) {
 });
 
 
+router.get('/GetCupom/:method/:id', function(req, res, next) {
+  
+  let query = {
+    query1: `Select pd.*, pi.*, cl.*, ed.*, fp.descricao as formaPgtNome from public."Pedidos" pd inner join public."Pedido_itens" pi
+    on pd.id = pi.id_pedido
+    inner join public."Forma_pagamento" fp
+    on pd.id_forma_pagamento = fp.id
+    inner join public."Clientes" cl
+	  on cl.id = pd.id_cliente
+    inner join public."Endereco" ed
+	  on cl.id = ed.id_usuario
+    where pd.id = ${req.params.id} `,
+    
+    query2 :  `Select pd.*, pi.*, cl.*, ed.*, fp.descricao as formaPgtNome from public."Pedidos" pd inner join public."Pedido_itens" pi
+    on pd.id = pi.id_pedido
+    inner join public."Forma_pagamento" fp
+    on pd.id_forma_pagamento = fp.id
+    inner join public."Clientes" cl
+	  on cl.id = pd.id_cliente
+    inner join public."Endereco" ed
+	  on cl.id = ed.id_usuario
+    where pd.id = (Select max(id) from public."Pedidos") `
+  }
+
+  if(req.params.method ==  'FinalizouVenda'){
+    console.log('ok');
+    userControler.ReturnAjax(req,res,'','','Cupom'," ",query.query2);
+  }
+  else{
+    console.log('ok2');
+    userControler.ReturnAjax(req,res,'','',req.params.method," ",query.query1);  
+  }
+
+
+});
+
+
+
 router.get('/accessVerify/:id',  (req,res,next)=>{
 
   if((!req.session.UserId) && (!req.session.logged == true)){
@@ -249,7 +287,7 @@ router.get('/pedidos/:id/:method', (req,res,next)=>{
 
   
   if(req.params.id == "clientes"){
-    userControler.ReturnAjax(req,res,'"Clientes"',req.params.id,req.params.method);
+    userControler.ReturnAjax(req,res,'"Clientes"',req.params.id,req.params.method,"");
   }
 
   if(req.params.id == "produtos"){
@@ -288,18 +326,53 @@ router.get('/pedidos/:id/:method', (req,res,next)=>{
 
   }
 
+  if(req.params.method == "Historico"){
+    let query = {
+      query1: `select pd.id, pd.valor_total, pd.data_pedido, 
+      cl.nome 
+      from public."Pedidos" pd 
+      inner join public."Clientes" cl 
+      on cl.id = pd.id_cliente
+      where pd.status_pedido <> 2 
+      and cl.id = ${req.params.id}`
+  
+    }
 
+    userControler.ReturnAjax(req,res,'','',req.params.method,'',query,'','','');
+
+  }
+
+
+  if(req.params.method == "HistoricoItens"){
+    console.log('chegou');
+    let query = {
+      query1: `select pi.descricao_produto, pi.descricao_sabor, pi.descricao_complemento,
+      pi.quantidade_produto 
+      from public."Pedidos" pd 
+	    inner join public."Pedido_itens" pi 
+      on pd.id = pi.id_pedido
+      where pd.status_pedido <> 2 
+      and pi.id_pedido = ${req.params.id}`
   
-  
+    }
+
+    userControler.ReturnAjax(req,res,'','',req.params.method,'',query,'','','');
+
+  }
+
   
   if(req.params.method == "search"){
 
     let data = JSON.parse(req.params.id);
-    
 
     switch(data.table){
       case "Produtos":
-        userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Produtos"'+" where descricao ilike " +"'%"+ data.value +"%'","");
+        if(data.search == '*'){
+          userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Produtos" order by descricao limit 10');
+        }
+        else{
+          userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Produtos"'+" where descricao ilike " +"'%"+ data.value +"%'" + 'order by descricao limit 10',"");
+        }
       break;
 
       case "Vendas":
@@ -311,13 +384,18 @@ router.get('/pedidos/:id/:method', (req,res,next)=>{
           
         }
         else{
-          userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Pedidos"'+" where id = " +' '+ "'"+data.value+"'" + 'order by id DESC',"");
+          if(data.search == '*'){
+            userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Pedidos"'+" order by id DESC ");
+          }
+          else{
+            userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Pedidos"'+" where id = " +' '+ "'"+data.value+"'" + 'order by id DESC',"");
+          }
+          
         }
 
       break;
 
       case "Sabores":
-        console.log('a');
           userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Sabores"'+" where descricao ilike " +"'%"+ data.value +"%'","");
       break;
 
@@ -327,12 +405,15 @@ router.get('/pedidos/:id/:method', (req,res,next)=>{
 
 
       case "Clientes":
-  
+        if(data.search == '*'){
+          userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Clientes" order by nome limit 10');
+        }
+        else{
+          userControler.ReturnAjax(req,res,"","",req.params.method,"","SELECT * FROM public."+'"Clientes"'+" where nome ilike " +"'%"+ data.value +"%' or telefone1 ilike " +"'%"+ data.value +"%' or telefone2 ilike " +"'%"+ data.value +"%' " + 'order by nome limit 10' ,"");
+        }
       break;
+
     }
-
-  
-
   }
 
 })
