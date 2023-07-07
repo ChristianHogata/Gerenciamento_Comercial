@@ -4,10 +4,10 @@ class connection {
       const connection = require('pg')
       const conn = new connection.Pool({
       user: "postgres",
-      password: "Syspro2014$",
+      password: "test",
       host: "127.0.0.1",
       port: 5432,
-      database: "MokuTech"
+      database: "test"
     })
 
     return conn;
